@@ -5,6 +5,7 @@ import requests
 import pdb
 import json
 import pyrise
+import logging
 
 from django import http
 from django.conf import settings
@@ -13,7 +14,7 @@ from django.conf import settings
 client_id = getattr(settings, 'HIGHRISE_CLIENT_ID', None)
 redirect_uri = getattr(settings, 'HIGHRISE_REDIRECT_URI', None)
 client_secret = getattr(settings, 'HIGHRISE_CLIENT_SECRET', None)
-highrise_server = 'https://guideadvisor.highrisehq.com'
+highrise_server = 'https://guideadvisor.highrisehq.com/'
 
 def index(request):
     launchpad_base_url = 'https://launchpad.37signals.com/'
@@ -44,7 +45,9 @@ def oauth(request):
     if req.status_code != 200:
         raise http.Http404
     data = json.loads(req.content)
-    Highrise.set_server(highrise_server)
-    Highrise.auth(data['access_token'])
-    people = Person.all()
+    logging.info(data)
+    pyrise.Highrise.set_server(highrise_server)
+    pyrise.Highrise.oauth(data['access_token'])
+    people = pyrise.Person.all()
+    pdb.set_trace()
     return http.HttpResponse(data['access_token'])
