@@ -95,6 +95,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'firepython.middleware.FirePythonDjango',
 )
 
 ROOT_URLCONF = 'gabda.urls'
@@ -122,6 +123,10 @@ INSTALLED_APPS = (
     'mailer'
 )
 
+# Highrise configuration
+HIGHRISE_CLIENT_ID = 'd0f0452abdde168042fe82dff08e23b8289e01b4'
+HIGHRISE_CLIENT_SECRET = 'c3f61658f8db8c21f8dd8db2d0e9cfca5b045e3d'
+HIGHRISE_REDIRECT_URI = 'http://127.0.0.1:8000/oauth'
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
